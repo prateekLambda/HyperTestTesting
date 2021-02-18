@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="200" name="DesktopBrowsers" parallel="tests">
+
+
+    <test name="1">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="version" value="latest"/>
+        <parameter name="platform" value="macos big sur"/>
+        <parameter name="fixedIp" value="10.242.32.145"/>
+        <classes>
+            <class name="magicLeap"/>
+
+        </classes>
+    </test>
+
+    <!--
+        <test name="2">
+            <parameter name="browser" value="Chrome"/>
+            <parameter name="version" value="87.0"/>
+            <parameter name="platform" value="macos big sur"/>
+            <parameter name="fixedIp" value="10.242.32.146"/>
+
+            <classes>
+                <class name="magicLeap"/>
+
+            </classes>
+        </test>
+
+        <test name="3">
+            <parameter name="browser" value="Firefox"/>
+            <parameter name="version" value="latest"/>
+            <parameter name="platform" value="macos big sur"/>
+            <parameter name="fixedIp" value="10.242.32.147"/>
+
+
+            <classes>
+                <class name="magicLeap"/>
+            </classes>
+        </test>
+
+        <test name="4">
+            <parameter name="browser" value="safari"/>
+            <parameter name="version" value="latest"/>
+            <parameter name="platform" value="macos big sur"/>
+            <parameter name="fixedIp" value="10.242.32.62"/>
+
+            <classes>
+                <class name="magicLeap"/>
+            </classes>
+        </test>
+
+        <test name="5">
+            <parameter name="browser" value="Safari"/>
+            <parameter name="version" value="latest"/>
+            <parameter name="platform" value="macos big sur"/>
+            <parameter name="fixedIp" value="10.243.32.200"/>
+
+            <classes>
+                <class name="magicLeap"/>
+            </classes>
+        </test>
+            <test name="6">
+                <parameter name="browser" value="Firefox"/>
+                <parameter name="version" value="74.0"/>
+                <parameter name="platform" value="macos big sur"/>
+                <parameter name="fixedIp" value="10.80.21.78"/>
+
+
+                <classes>
+                    <class name="magicLeap"/>
+                </classes>
+            </test>
+
+        -->
+</suite>
