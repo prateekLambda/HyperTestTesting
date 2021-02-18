@@ -76,7 +76,7 @@ public class magicLeap {
         }
     }
 
-    @BeforeTest
+      @BeforeTest
     public void setUp() throws Exception {
         System.out.println(this.TestName);
 
@@ -86,50 +86,56 @@ public class magicLeap {
 
         System.out.println("Value of Loop is" + " " + LoopNumber + " " + "Test Session");
         for (int i = 0; i < LoopnumberInterger; i++) {*/
-        try {
+
+        for (int i = 0; i < 10; i++) {
+            try {
 
 
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("browserName", this.BrowserValue);
-            capabilities.setCapability("version", this.versionValue);
-            capabilities.setCapability("platform", this.PlatformValue);
-            capabilities.setCapability("fixedIP", this.FixedIpValue);
-            capabilities.setCapability("build", "Mac Machines" + "  " + this.PlatformValue);
-            capabilities.setCapability("resolution", "");
-            capabilities.setCapability("console", true);
-            capabilities.setCapability("network", true);
-            capabilities.setCapability("visual", true);
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setCapability("browserName", this.BrowserValue);
+                capabilities.setCapability("version", "latest" + i);
+                capabilities.setCapability("platform", this.PlatformValue);
+                capabilities.setCapability("fixedIP", this.FixedIpValue);
+                capabilities.setCapability("build", "Mac Machines" + "  " + this.PlatformValue);
+                capabilities.setCapability("resolution", "");
+                capabilities.setCapability("console", true);
+                capabilities.setCapability("network", true);
+                capabilities.setCapability("visual", true);
 
 
-            StopWatch driverStart = new StopWatch();
-            driverStart.start();
+                StopWatch driverStart = new StopWatch();
+                driverStart.start();
 
-            hub = "http://" + username + ":" + accesskey + "@" + gridURL + "/wd/hub";
-            // hub = "http://localhost:4444/wd/hub";
-            // hub = System.getenv("hub");
-            System.out.println(hub);
+                hub = "http://" + username + ":" + accesskey + "@" + gridURL + "/wd/hub";
+                // hub = "http://localhost:4444/wd/hub";
+                // hub = System.getenv("hub");
+                System.out.println(hub);
 
-            driver = new RemoteWebDriver(new URL(hub), capabilities);
-
-            System.out.println(capabilities);
-            driverStart.stop();
-
-            float timeElapsed = driverStart.getTime() / 1000f;
-            System.out.println("Driver initiate time" + "   " + timeElapsed);
+                driver = new RemoteWebDriver(new URL(hub), capabilities);
 
 
-        } catch (
-                MalformedURLException e) {
-            System.out.println("Invalid grid URL");
-        } catch (
-                Exception f) {
-            status = "failed";
-            System.out.println(f);
+                DesktopScript();
+                tearDown();
+                System.out.println(capabilities);
+                driverStart.stop();
 
+                float timeElapsed = driverStart.getTime() / 1000f;
+                System.out.println("Driver initiate time" + "   " + timeElapsed);
+
+
+            } catch (
+                    MalformedURLException e) {
+                System.out.println("Invalid grid URL");
+            } catch (
+                    Exception f) {
+                status = "failed";
+                System.out.println(f);
+
+            }
+            //  }
         }
-        //  }
-
     }
+
 
     @Test
     public void DesktopScript() {
