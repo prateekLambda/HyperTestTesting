@@ -87,12 +87,12 @@ public class magicLeap {
         System.out.println("Value of Loop is" + " " + LoopNumber + " " + "Test Session");
         for (int i = 0; i < LoopnumberInterger; i++) {*/
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             try {
 
 
                 DesiredCapabilities capabilities = new DesiredCapabilities();
-                capabilities.setCapability("browserName", this.BrowserValue);
+                capabilities.setCapability("browserName", "Chrome");
                 capabilities.setCapability("version", "latest" + i);
                 capabilities.setCapability("platform", this.PlatformValue);
                 capabilities.setCapability("fixedIP", this.FixedIpValue);
