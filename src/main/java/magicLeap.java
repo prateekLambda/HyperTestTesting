@@ -93,7 +93,7 @@ public class magicLeap {
 
                 DesiredCapabilities capabilities = new DesiredCapabilities();
                 capabilities.setCapability("browserName", "Chrome");
-                capabilities.setCapability("version", "latest" + i);
+                capabilities.setCapability("version", "88.0");
                 capabilities.setCapability("platform", this.PlatformValue);
                 capabilities.setCapability("fixedIP", this.FixedIpValue);
                 capabilities.setCapability("build", "Mac Machines" + "  " + this.PlatformValue);
