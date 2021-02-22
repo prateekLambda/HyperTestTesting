@@ -92,8 +92,8 @@ public class magicLeap {
 
 
                 DesiredCapabilities capabilities = new DesiredCapabilities();
-                capabilities.setCapability("browserName", "Chrome");
-                capabilities.setCapability("version", "88.0");
+                capabilities.setCapability("browserName", "chrome");
+              
                 capabilities.setCapability("accessKey", accesskey);
                 
 
