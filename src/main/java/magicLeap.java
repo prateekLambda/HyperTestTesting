@@ -20,9 +20,9 @@ import java.util.Properties;
 public class magicLeap {
 
     public String username = "prateeks";
-    public String accesskey = "IuCSesD83A7LsTFzEKS0Lb6tzvEfBQ38DMkFTEpudatxxxsdjH";
+    public String accesskey = "eyJhbGciOiJIUzI1NiJ9.eyJ4cC51IjoxMDcwODY4NCwieHAucCI6MTA3MDg2ODMsInhwLm0iOjE2MTM3NjgwMTI2MjksImV4cCI6MTkyOTEyODAyOCwiaXNzIjoiY29tLmV4cGVyaXRlc3QifQ.oJTEF4TAHdGttidbLGcwlB8yLFZtx6g0HRVIJPchBSE";
     public RemoteWebDriver driver;
-    public String gridURL = "stage-hub.lambdatest.com"; // "@eu-central-1-hub.lambdatest.com/wd/hub";
+    public String gridURL = "cloud.seetest.io"; // "@eu-central-1-hub.lambdatest.com/wd/hub";
     String status;
     String ResolutionValue;
     long quitestoptime;
@@ -87,26 +87,20 @@ public class magicLeap {
         System.out.println("Value of Loop is" + " " + LoopNumber + " " + "Test Session");
         for (int i = 0; i < LoopnumberInterger; i++) {*/
 
-        for (int i = 0; i < 20; i++) {
+      //  for (int i = 0; i < 20; i++) {
             try {
 
 
                 DesiredCapabilities capabilities = new DesiredCapabilities();
                 capabilities.setCapability("browserName", "Chrome");
                 capabilities.setCapability("version", "88.0");
-                capabilities.setCapability("platform", this.PlatformValue);
-                capabilities.setCapability("fixedIP", this.FixedIpValue);
-                capabilities.setCapability("build", "Mac Machines" + "  " + this.PlatformValue);
-                capabilities.setCapability("resolution", "");
-                capabilities.setCapability("console", true);
-                capabilities.setCapability("network", true);
-                capabilities.setCapability("visual", true);
-
+                capabilities.setCapability("accessKey", accesskey);
+                
 
                 StopWatch driverStart = new StopWatch();
                 driverStart.start();
 
-                hub = "http://" + username + ":" + accesskey + "@" + gridURL + "/wd/hub";
+                hub = "https://" + gridURL + "/wd/hub";
                 // hub = "http://localhost:4444/wd/hub";
                 // hub = System.getenv("hub");
                 System.out.println(hub);
@@ -114,8 +108,7 @@ public class magicLeap {
                 driver = new RemoteWebDriver(new URL(hub), capabilities);
 
 
-                DesktopScript();
-                tearDown();
+                
                 System.out.println(capabilities);
                 driverStart.stop();
 
@@ -133,7 +126,7 @@ public class magicLeap {
 
             }
             //  }
-        }
+        //}
     }
 
 
