@@ -137,16 +137,12 @@ public class magicLeap {
 
             System.out.println(driver.getCapabilities());
             driver.manage().window().maximize();
-            DesignPlane Air = new DesignPlane();
-            Air.plane(driver);
-            GoogleExperiments exp = new GoogleExperiments();
-            exp.Music(driver);
+            
 
 
             //   driver.get("https://www.google.com");
 
-            LogEntries logEntries = driver.manage().logs().get(LogType.BROWSER);
-            System.out.println(logEntries);
+           
             GoogleSpace space = new GoogleSpace();
             space.GSpace(driver);
 
