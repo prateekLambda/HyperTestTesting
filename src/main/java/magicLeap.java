@@ -89,7 +89,7 @@ public class magicLeap {
             capabilities.setCapability("browserVersion", "latest");
             capabilities.setCapability("platform", "win10");
             capabilities.setCapability("visual", true);
-            capabilities.setCapability("fixedIP", "10.81.70.203");
+            capabilities.setCapability("fixedIP", "10.80.45.185");
             // capabilities.setCapability("accessKey", accesskey);
 
 
@@ -101,7 +101,7 @@ public class magicLeap {
             hub = System.getenv("hub");
             System.out.println(hub);
 
-            driver = new RemoteWebDriver(new URL("https://japneets:ko4v0hQNB4HELrRwNXX3lXOL9YmI2wC7FDUeibO5rlqPkINj3G@stage-hub.lambdatest.com/wd/hub"), capabilities);
+            driver = new RemoteWebDriver(new URL("https://japneets:ko4v0hQNB4HELrRwNXX3lXOL9YmI2wC7FDUeibO5rlqPkINj3G@hub.lambdatest.com/wd/hub"), capabilities);
 
 
             System.out.println(capabilities);
