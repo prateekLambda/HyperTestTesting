@@ -33,14 +33,14 @@ public class magicLeap {
     long ResolutionTotal;
     long totaltesttimeDuration;
     SessionId session;
-    String BrowserValue;
-    String versionValue;
-    String PlatformValue;
-    String FixedIpValue;
+    String BrowserValue=null;
+    String versionValue=null;
+    String PlatformValue=null;
+    String FixedIpValue=null;
     String ResolutionValueCap;
     String TimeZoneValue;
     String GeoLocationValue;
-    String hub;
+    String hub=null;
     String TestName;
     String Space = "  ";
     String Tunnel;
@@ -51,13 +51,13 @@ public class magicLeap {
     Long AllVersions = null;
 
 
-    @org.testng.annotations.Parameters(value = {"browser", "version", "platform", "fixedIp"})
-    public magicLeap(String browser, String version, String platform, String fixedIp) {
+    @org.testng.annotations.Parameters(value = {"browser", "version", "platform"})
+    public magicLeap(String browser, String version, String platform) {
         try {
-            BrowserValue = browser;
-            versionValue = version;
-            PlatformValue = platform;
-            FixedIpValue = fixedIp;
+            BrowserValue = System.getenv("browser");
+            versionValue = System.getenv("version");;
+            PlatformValue = System.getenv("platform");
+            FixedIpValue = System.getenv("fixedIP");
             Tunnel = System.getProperty("tunnel");
             if (BrowserValue != null) {
                 TestName = BrowserValue;
@@ -76,95 +76,116 @@ public class magicLeap {
         }
     }
 
-      @BeforeTest
+    @BeforeTest
     public void setUp() throws Exception {
         System.out.println(this.TestName);
 
-        /*String LoopNumber = System.getenv("LoopNumber");
-        System.out.println("Value of Loop is" + " " + LoopNumber + " " + "Test Session");
-        int LoopnumberInterger = Integer.parseInt(LoopNumber);
 
-        System.out.println("Value of Loop is" + " " + LoopNumber + " " + "Test Session");
-        for (int i = 0; i < LoopnumberInterger; i++) {*/
-
-      //  for (int i = 0; i < 20; i++) {
-            try {
+        try {
 
 
-                DesiredCapabilities capabilities = new DesiredCapabilities();
-                capabilities.setCapability("browserName", "chrome");
-              
-                capabilities.setCapability("accessKey", accesskey);
-                
-
-                StopWatch driverStart = new StopWatch();
-                driverStart.start();
-
-                hub = "https://" + gridURL + "/wd/hub";
-                // hub = "http://localhost:4444/wd/hub";
-                // hub = System.getenv("hub");
-                System.out.println(hub);
-
-                driver = new RemoteWebDriver(new URL(hub), capabilities);
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("browserName", this.BrowserValue);
+            capabilities.setCapability("browserVersion", this.versionValue);
+            capabilities.setCapability("platform", this.PlatformValue);
+            capabilities.setCapability("visual", true);
+            capabilities.setCapability("fixedIP", this.FixedIpValue);
+            // capabilities.setCapability("accessKey", accesskey);
 
 
-                
-                System.out.println(capabilities);
-                driverStart.stop();
+            StopWatch driverStart = new StopWatch();
+            driverStart.start();
 
-                float timeElapsed = driverStart.getTime() / 1000f;
-                System.out.println("Driver initiate time" + "   " + timeElapsed);
+            // hub = "https://" + gridURL + "/wd/hub";
+            // hub = "http://localhost:4444/wd/hub";
+            hub = System.getenv("hub");
+            System.out.println(hub);
+
+            driver = new RemoteWebDriver(new URL(hub), capabilities);
 
 
-            } catch (
-                    MalformedURLException e) {
-                System.out.println("Invalid grid URL");
-            } catch (
-                    Exception f) {
-                status = "failed";
-                System.out.println(f);
+            System.out.println(capabilities);
+            driverStart.stop();
 
-            }
-            //  }
-        //}
+            float timeElapsed = driverStart.getTime() / 1000f;
+            System.out.println("Driver initiate time" + "   " + timeElapsed);
+
+
+        } catch (
+                MalformedURLException e) {
+            System.out.println("Invalid grid URL");
+            System.out.println("Please set the hub URL in the env variable");
+
+        } catch (
+                Exception f) {
+            status = "failed";
+            System.out.println(f);
+
+        }
+
     }
 
 
     @Test
     public void DesktopScript() {
         try {
+            /*String LoopNumber = System.getenv("LoopNumber");
+            System.out.println("Value of Loop is" + " " + LoopNumber + " " + "Test Session");
+            int LoopnumberInterger = Integer.parseInt(LoopNumber);
+
+            System.out.println("Value of Loop is" + " " + LoopNumber + " " + "Test Session");
+            for (int i = 0; i < LoopnumberInterger; i++) {*/
             SuiteStart = System.currentTimeMillis();
 
             System.out.println(driver.getCapabilities());
             driver.manage().window().maximize();
-            
+//                DesignPlane Air = new DesignPlane();
+//                Air.plane(driver);
+//                GoogleExperiments exp = new GoogleExperiments();
+//                exp.Music(driver);
 
 
             //   driver.get("https://www.google.com");
 
-           
+
             GoogleSpace space = new GoogleSpace();
             space.GSpace(driver);
-
+            TakeScreenShot scr = new TakeScreenShot();
+            scr.Screenshot(driver, status);
             TelescopeView view = new TelescopeView();
             view.Tele(driver);
+            scr.Screenshot(driver, status);
             VideoUpload vid = new VideoUpload();
             vid.vidupload(driver);
 
+            scr.Screenshot(driver, status);
+
             shoopingCart shop = new shoopingCart();
             shop.amazon(driver);
+
+            scr.Screenshot(driver, status);
             DesignCar car = new DesignCar();
             car.CarDesign(driver);
 
+            scr.Screenshot(driver, status);
+
             RockDoor Test = new RockDoor();
             Test.RockDoorTest(driver);
+
+            scr.Screenshot(driver, status);
             SkyMap mapTest = new SkyMap();
             mapTest.SkyMapTest(driver);
 
+            scr.Screenshot(driver, status);
+
             SessionTest tet = new SessionTest();
             tet.SessionLaunch(driver, status);
+
+            scr.Screenshot(driver, status);
             LambdaTestLogin login = new LambdaTestLogin();
             login.Lambda(driver, status);
+
+            scr.Screenshot(driver, status);
 
 
             //ToDo app
@@ -173,31 +194,38 @@ public class magicLeap {
             StreamTest stream = new StreamTest();
             stream.TestStream(driver, status);
 
+            scr.Screenshot(driver, status);
             uploadTest upTest = new uploadTest();
             upTest.upload(driver, status);
-
+            scr.Screenshot(driver, status);
+            scr.Screenshot(driver, status);
             ResolutionTest ResolutionTestObject = new ResolutionTest();
             ResolutionTestObject.Resolution(driver, ResolutionValue, status, ResolutionTotal, this.ResolutionValueCap);
+            scr.Screenshot(driver, status);
             BadSslTest nonSecure = new BadSslTest();
             nonSecure.badSsl(driver, status);
+            scr.Screenshot(driver, status);
             NetSpeed net = new NetSpeed();
             net.NetSpeed(driver, status, Nettotalspeedtest);
+            scr.Screenshot(driver, status);
             GeolocationTest Geo = new GeolocationTest();
             Geo.Geolocation(driver, status, GeolocationTotal);
             FakeMediaTest FK = new FakeMediaTest();
             FK.TestFakeMediaPermissions(driver);
             TestCase ractice = new TestCase();
             ractice.LongCase(driver);
-            HeavyTestWeb hvy = new HeavyTestWeb();
-            hvy.heavy(driver);
+//                HeavyTestWeb hvy = new HeavyTestWeb();
+//                hvy.heavy(driver);
 
             SuiteStop = System.currentTimeMillis();
             SuiteTotalTime = SuiteStop - SuiteStart;
             System.out.println("Total Time Took for Test suite execute" + "   " + SuiteTotalTime / 1000f);
-
+            //}
 
         } catch (Exception e) {
             System.out.println(e);
+
+            System.out.println("Please set the loop value in the environment value");
         }
     }
 
