@@ -71,7 +71,7 @@ public class magicLeap {
                     }
                 }
             }
-
+           System.out.println(BrowserValue + versionValue + PlatformValue + FixedIpValue);
         } catch (Exception t) {
         }
     }
