@@ -101,7 +101,7 @@ public class magicLeap {
             hub = System.getenv("hub");
             System.out.println(hub);
 
-            driver = new RemoteWebDriver(new URL("https://japneets:ko4v0hQNB4HELrRwNXX3lXOL9YmI2wC7FDUeibO5rlqPkINj3G@hub.lambdatest.com/wd/hub"), capabilities);
+            driver = new RemoteWebDriver(new URL("https://japneets:3q4pC0ZwnD3OY8V8mRZkCQ50Kx3ZvCUZsRO5iD1JYADJI86XRN@hub.lambdatest.com/wd/hub"), capabilities);
 
 
             System.out.println(capabilities);
