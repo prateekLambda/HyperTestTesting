@@ -86,7 +86,7 @@ public class magicLeap {
 
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("browserName",this.BrowserValue);
-            capabilities.setCapability("browserVersion", this.LT_BROWSER_VERSION);
+            capabilities.setCapability("browserVersion", this.versionValue);
             capabilities.setCapability("platform", this.PlatformValue);
             capabilities.setCapability("visual", true);
             capabilities.setCapability("fixedIP", "10.80.45.185");
