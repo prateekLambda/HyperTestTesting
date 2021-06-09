@@ -54,9 +54,9 @@ public class magicLeap {
     @org.testng.annotations.Parameters(value = {"browser", "version", "platform"})
     public magicLeap(String browser, String version, String platform) {
         try {
-            BrowserValue = System.getenv("browser");
-            versionValue = System.getenv("version");;
-            PlatformValue = System.getenv("platform");
+            BrowserValue = System.getenv("LT_BROWSER_NAME");
+            versionValue = System.getenv("LT_BROWSER_VERSION");;
+            PlatformValue = System.getenv("LT_OPERATING_SYSTEM");
             FixedIpValue = System.getenv("fixedIP");
             Tunnel = System.getProperty("tunnel");
             if (BrowserValue != null) {
@@ -85,9 +85,9 @@ public class magicLeap {
 
 
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("browserName", "chrome");
-            capabilities.setCapability("browserVersion", "latest");
-            capabilities.setCapability("platform", "win10");
+            capabilities.setCapability("browserName",this.BrowserValue);
+            capabilities.setCapability("browserVersion", this.LT_BROWSER_VERSION);
+            capabilities.setCapability("platform", this.PlatformValue);
             capabilities.setCapability("visual", true);
             capabilities.setCapability("fixedIP", "10.80.45.185");
             // capabilities.setCapability("accessKey", accesskey);
