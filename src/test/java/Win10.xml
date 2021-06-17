@@ -13,7 +13,7 @@
 
         </classes>
     </test>
-
+<!--
     
         <test name="2">
             <parameter name="browser" value="Chrome"/>
@@ -38,7 +38,7 @@
                 <class name="magicLeap"/>
             </classes>
         </test>
-<!--
+
         <test name="4">
             <parameter name="browser" value="safari"/>
             <parameter name="version" value="latest"/>
