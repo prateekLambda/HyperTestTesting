@@ -19,10 +19,11 @@ import java.util.Properties;
 
 public class magicLeap {
 
-    public String username = "prateeks";
-    public String accesskey = "eyJhbGciOiJIUzI1NiJ9.eyJ4cC51IjoxMDcwODY4NCwieHAucCI6MTA3MDg2ODMsInhwLm0iOjE2MTM3NjgwMTI2MjksImV4cCI6MTkyOTEyODAyOCwiaXNzIjoiY29tLmV4cGVyaXRlc3QifQ.oJTEF4TAHdGttidbLGcwlB8yLFZtx6g0HRVIJPchBSE";
+    public String username = System.getProperty("LT_USERNAME");
+    public String accesskey = System.getProperty("LT_ACCESS_KEY");
     public RemoteWebDriver driver;
-    public String gridURL = "cloud.seetest.io"; // "@eu-central-1-hub.lambdatest.com/wd/hub";
+    public String gridURL = System.getProperty("grid");
+    ; // "@eu-central-1-hub.lambdatest.com/wd/hub";
     String status;
     String ResolutionValue;
     long quitestoptime;
@@ -33,14 +34,14 @@ public class magicLeap {
     long ResolutionTotal;
     long totaltesttimeDuration;
     SessionId session;
-    String BrowserValue=null;
-    String versionValue=null;
-    String PlatformValue=null;
-    String FixedIpValue=null;
+    String BrowserValue = null;
+    String versionValue = null;
+    String PlatformValue = null;
+    String FixedIpValue = null;
     String ResolutionValueCap;
     String TimeZoneValue;
     String GeoLocationValue;
-    String hub=null;
+    String hub = null;
     String TestName;
     String Space = "  ";
     String Tunnel;
@@ -54,10 +55,11 @@ public class magicLeap {
     @org.testng.annotations.Parameters(value = {"browser", "version", "platform"})
     public magicLeap(String browser, String version, String platform) {
         try {
+
             BrowserValue = System.getenv("LT_BROWSER_NAME");
-            versionValue = System.getenv("LT_BROWSER_VERSION");;
+            versionValue = System.getenv("LT_BROWSER_VERSION");
             PlatformValue = System.getenv("LT_OPERATING_SYSTEM");
-            FixedIpValue = System.getenv("fixedIP");
+            FixedIpValue = System.getProperty("fixedIP");
             Tunnel = System.getProperty("tunnel");
             if (BrowserValue != null) {
                 TestName = BrowserValue;
@@ -71,7 +73,7 @@ public class magicLeap {
                     }
                 }
             }
-           System.out.println(BrowserValue + versionValue + PlatformValue + FixedIpValue);
+            System.out.println(BrowserValue + versionValue + PlatformValue + FixedIpValue);
         } catch (Exception t) {
         }
     }
@@ -85,23 +87,24 @@ public class magicLeap {
 
 
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("browserName",this.BrowserValue);
+            capabilities.setCapability("browserName", this.BrowserValue);
             capabilities.setCapability("browserVersion", this.versionValue);
             capabilities.setCapability("platform", this.PlatformValue);
-            capabilities.setCapability("visual", true);
-            capabilities.setCapability("fixedIP", "10.82.3.57");
+            capabilities.setCapability("visual", System.getProperty("visual"));
+            capabilities.setCapability("fixedIP", this.FixedIpValue);
+
             // capabilities.setCapability("accessKey", accesskey);
 
 
             StopWatch driverStart = new StopWatch();
             driverStart.start();
 
-            // hub = "https://" + gridURL + "/wd/hub";
+            hub = "https://" + username + ":" + accesskey + "@" + gridURL + "/wd/hub";
             // hub = "http://localhost:4444/wd/hub";
-            hub = System.getenv("hub");
+
             System.out.println(hub);
 
-            driver = new RemoteWebDriver(new URL("https://vikast:LyepAsZzzl1AH7abv4rXYnSHIgjlIUFbMwxuDQj2ECR7OQ3sPT@stage-hub.lambdatest.com/wd/hub"), capabilities);
+            driver = new RemoteWebDriver(new URL(hub), capabilities);
 
 
             System.out.println(capabilities);
@@ -137,12 +140,13 @@ public class magicLeap {
             for (int i = 0; i < LoopnumberInterger; i++) {*/
             SuiteStart = System.currentTimeMillis();
 
-            System.out.println(driver.getCapabilities());
+
             driver.manage().window().maximize();
-//                DesignPlane Air = new DesignPlane();
-//                Air.plane(driver);
-//                GoogleExperiments exp = new GoogleExperiments();
-//                exp.Music(driver);
+
+            DesignPlane Air = new DesignPlane();
+            Air.plane(driver);
+            GoogleExperiments exp = new GoogleExperiments();
+            exp.Music(driver);
 
 
             //   driver.get("https://www.google.com");
