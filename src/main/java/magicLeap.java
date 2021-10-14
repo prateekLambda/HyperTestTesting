@@ -92,7 +92,7 @@ public class magicLeap {
                 capabilities.setCapability("platform", this.PlatformValue);
                 //capabilities.setCapability("visual", System.getProperty("visual"));
                 capabilities.setCapability("fixedIP", FixedIpValue);
-                capabilities.addExtensions(new File(System.getProperty("user.dir") + "/Extension/" + "chrome_successful.zip"));
+                capabilities.addExtensions(new File("Extension/chrome_successful.zip"));
 
                 // capabilities.setCapability("accessKey", accesskey);
 
