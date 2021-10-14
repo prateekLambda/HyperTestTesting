@@ -13,16 +13,17 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 
 public class magicLeap {
 
-    public String username = System.getProperty("LT_USERNAME");
-    public String accesskey = System.getProperty("LT_ACCESS_KEY");
+    public String username = "saurabhlambdatest";
+    public String accesskey = "3822ZWc92Nlj14URYtqggRpVYHVk7pu7rs7Dqx1AjJe5NUHPRA";
     public RemoteWebDriver driver;
-    public String gridURL = System.getProperty("grid");
+    public String gridURL = "preprod-hub.lambdatest.com";
     ; // "@eu-central-1-hub.lambdatest.com/wd/hub";
     String status;
     String ResolutionValue;
@@ -52,14 +53,14 @@ public class magicLeap {
     Long AllVersions = null;
 
 
-    @org.testng.annotations.Parameters(value = {"browser", "version", "platform"})
-    public magicLeap(String browser, String version, String platform) {
+    @org.testng.annotations.Parameters(value = {"browser", "version", "platform","fixedIp"})
+    public magicLeap(String browser, String version, String platform, String fixedIp) {
         try {
 
-            BrowserValue = System.getenv("LT_BROWSER_NAME");
-            versionValue = System.getenv("LT_BROWSER_VERSION");
-            PlatformValue = System.getenv("LT_OPERATING_SYSTEM");
-            FixedIpValue = System.getProperty("fixedIP");
+            BrowserValue = browser;
+            versionValue = version;
+            PlatformValue = platform;
+            FixedIpValue = fixedIp;
             Tunnel = System.getProperty("tunnel");
             if (BrowserValue != null) {
                 TestName = BrowserValue;
@@ -82,50 +83,47 @@ public class magicLeap {
     public void setUp() throws Exception {
         System.out.println(this.TestName);
 
+        for (int i =0 ; i<50;i++) {
+            try {
 
-        try {
+                ChromeOptions capabilities = new ChromeOptions();
+                capabilities.setCapability("browserName", this.BrowserValue);
+                capabilities.setCapability("browserVersion", this.versionValue);
+                capabilities.setCapability("platform", this.PlatformValue);
+                //capabilities.setCapability("visual", System.getProperty("visual"));
+                capabilities.setCapability("fixedIP", FixedIpValue);
+                capabilities.addExtensions(new File(System.getProperty("user.dir") + "/Extension/" + "chrome_successful.zip"));
 
+                // capabilities.setCapability("accessKey", accesskey);
 
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("browserName", this.BrowserValue);
-            capabilities.setCapability("browserVersion", this.versionValue);
-            capabilities.setCapability("platform", this.PlatformValue);
-            capabilities.setCapability("visual", System.getProperty("visual"));
-            capabilities.setCapability("fixedIP", this.FixedIpValue);
+                StopWatch driverStart = new StopWatch();
+                driverStart.start();
 
-            // capabilities.setCapability("accessKey", accesskey);
+                hub = "https://" + username + ":" + accesskey + "@" + gridURL + "/wd/hub";
+                // hub = "http://localhost:4444/wd/hub";
 
+                System.out.println(hub);
 
-            StopWatch driverStart = new StopWatch();
-            driverStart.start();
+                driver = new RemoteWebDriver(new URL(hub), capabilities);
 
-            hub = "https://" + username + ":" + accesskey + "@" + gridURL + "/wd/hub";
-            // hub = "http://localhost:4444/wd/hub";
+                System.out.println(capabilities);
+                driverStart.stop();
 
-            System.out.println(hub);
+                float timeElapsed = driverStart.getTime() / 1000f;
+                System.out.println("Driver initiate time" + "   " + timeElapsed);
+                DesktopScript();
+                tearDown();
+                driver.quit();
+            } catch (MalformedURLException e) {
+                System.out.println("Invalid grid URL");
+                System.out.println("Please set the hub URL in the env variable");
 
-            driver = new RemoteWebDriver(new URL(hub), capabilities);
+            } catch (Exception f) {
+                status = "failed";
+                System.out.println(f);
 
-
-            System.out.println(capabilities);
-            driverStart.stop();
-
-            float timeElapsed = driverStart.getTime() / 1000f;
-            System.out.println("Driver initiate time" + "   " + timeElapsed);
-
-
-        } catch (
-                MalformedURLException e) {
-            System.out.println("Invalid grid URL");
-            System.out.println("Please set the hub URL in the env variable");
-
-        } catch (
-                Exception f) {
-            status = "failed";
-            System.out.println(f);
-
+            }
         }
-
     }
 
 
@@ -143,53 +141,53 @@ public class magicLeap {
 
             driver.manage().window().maximize();
 
-            DesignPlane Air = new DesignPlane();
-            Air.plane(driver);
-            GoogleExperiments exp = new GoogleExperiments();
-            exp.Music(driver);
+//            DesignPlane Air = new DesignPlane();
+//            Air.plane(driver);
+//            GoogleExperiments exp = new GoogleExperiments();
+//            exp.Music(driver);
 
 
             //   driver.get("https://www.google.com");
 
 
-            GoogleSpace space = new GoogleSpace();
-            space.GSpace(driver);
-            TakeScreenShot scr = new TakeScreenShot();
-            scr.Screenshot(driver, status);
-            TelescopeView view = new TelescopeView();
-            view.Tele(driver);
-            scr.Screenshot(driver, status);
-            VideoUpload vid = new VideoUpload();
-            vid.vidupload(driver);
-
-            scr.Screenshot(driver, status);
-
-            shoopingCart shop = new shoopingCart();
-            shop.amazon(driver);
-
-            scr.Screenshot(driver, status);
-            DesignCar car = new DesignCar();
-            car.CarDesign(driver);
-
-            scr.Screenshot(driver, status);
-
-            RockDoor Test = new RockDoor();
-            Test.RockDoorTest(driver);
-
-            scr.Screenshot(driver, status);
-            SkyMap mapTest = new SkyMap();
-            mapTest.SkyMapTest(driver);
-
-            scr.Screenshot(driver, status);
-
-            SessionTest tet = new SessionTest();
-            tet.SessionLaunch(driver, status);
-
-            scr.Screenshot(driver, status);
-            LambdaTestLogin login = new LambdaTestLogin();
-            login.Lambda(driver, status);
-
-            scr.Screenshot(driver, status);
+//            GoogleSpace space = new GoogleSpace();
+//            space.GSpace(driver);
+//            TakeScreenShot scr = new TakeScreenShot();
+//            scr.Screenshot(driver, status);
+//            TelescopeView view = new TelescopeView();
+//            view.Tele(driver);
+//            scr.Screenshot(driver, status);
+//            VideoUpload vid = new VideoUpload();
+//            vid.vidupload(driver);
+//
+//            scr.Screenshot(driver, status);
+//
+//            shoopingCart shop = new shoopingCart();
+//            shop.amazon(driver);
+//
+//            scr.Screenshot(driver, status);
+//            DesignCar car = new DesignCar();
+//            car.CarDesign(driver);
+//
+//            scr.Screenshot(driver, status);
+//
+//            RockDoor Test = new RockDoor();
+//            Test.RockDoorTest(driver);
+//
+//            scr.Screenshot(driver, status);
+//            SkyMap mapTest = new SkyMap();
+//            mapTest.SkyMapTest(driver);
+//
+//            scr.Screenshot(driver, status);
+//
+//            SessionTest tet = new SessionTest();
+//            tet.SessionLaunch(driver, status);
+//
+//            scr.Screenshot(driver, status);
+//            LambdaTestLogin login = new LambdaTestLogin();
+//            login.Lambda(driver, status);
+//
+//            scr.Screenshot(driver, status);
 
 
             //ToDo app
@@ -198,28 +196,29 @@ public class magicLeap {
             StreamTest stream = new StreamTest();
             stream.TestStream(driver, status);
 
-            scr.Screenshot(driver, status);
-            uploadTest upTest = new uploadTest();
-            upTest.upload(driver, status);
-            scr.Screenshot(driver, status);
-            scr.Screenshot(driver, status);
-            ResolutionTest ResolutionTestObject = new ResolutionTest();
-            ResolutionTestObject.Resolution(driver, ResolutionValue, status, ResolutionTotal, this.ResolutionValueCap);
-            scr.Screenshot(driver, status);
-            BadSslTest nonSecure = new BadSslTest();
-            nonSecure.badSsl(driver, status);
-            scr.Screenshot(driver, status);
-            NetSpeed net = new NetSpeed();
-            net.NetSpeed(driver, status, Nettotalspeedtest);
-            scr.Screenshot(driver, status);
-            GeolocationTest Geo = new GeolocationTest();
-            Geo.Geolocation(driver, status, GeolocationTotal);
-            FakeMediaTest FK = new FakeMediaTest();
-            FK.TestFakeMediaPermissions(driver);
-            TestCase ractice = new TestCase();
-            ractice.LongCase(driver);
-//                HeavyTestWeb hvy = new HeavyTestWeb();
-//                hvy.heavy(driver);
+//            scr.Screenshot(driver, status);
+//            uploadTest upTest = new uploadTest();
+//            upTest.upload(driver, status);
+//            scr.Screenshot(driver, status);
+//            scr.Screenshot(driver, status);
+//            ResolutionTest ResolutionTestObject = new ResolutionTest();
+//            ResolutionTestObject.Resolution(driver, ResolutionValue, status, ResolutionTotal, this.ResolutionValueCap);
+//            scr.Screenshot(driver, status);
+//            BadSslTest nonSecure = new BadSslTest();
+//            nonSecure.badSsl(driver, status);
+//            scr.Screenshot(driver, status);
+//            NetSpeed net = new NetSpeed();
+//            net.NetSpeed(driver, status, Nettotalspeedtest);
+//            scr.Screenshot(driver, status);
+//            GeolocationTest Geo = new GeolocationTest();
+//            Geo.Geolocation(driver, status, GeolocationTotal);
+//            FakeMediaTest FK = new FakeMediaTest();
+//            FK.TestFakeMediaPermissions(driver);
+//            TestCase ractice = new TestCase();
+//            ractice.LongCase(driver);
+            //                HeavyTestWeb hvy = new HeavyTestWeb();
+            //                hvy.heavy(driver);
+            driver.get("https://www.google.com/");
 
             SuiteStop = System.currentTimeMillis();
             SuiteTotalTime = SuiteStop - SuiteStart;
@@ -242,7 +241,7 @@ public class magicLeap {
 
         quitetimestart = System.currentTimeMillis();
         if (driver != null) {
-            driver.quit();
+           // driver.quit();
 
 
         }
