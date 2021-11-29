@@ -90,8 +90,7 @@ public class magicLeap {
             capabilities.setCapability("browserName", this.BrowserValue);
             capabilities.setCapability("browserVersion", this.versionValue);
             capabilities.setCapability("platform", this.PlatformValue);
-            capabilities.setCapability("visual", System.getProperty("visual"));
-            capabilities.setCapability("fixedIP", this.FixedIpValue);
+            capabilities.setCapability("tunnel", true);
 
             // capabilities.setCapability("accessKey", accesskey);
 
