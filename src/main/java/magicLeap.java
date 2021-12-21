@@ -82,7 +82,9 @@ public class magicLeap {
     public void setUp() throws Exception {
         System.out.println(this.TestName);
 
-
+        int i = 0;
+        int j = System.getProperty("loopvalue");  
+        for (i; i<j; i++ ){
         try {
 
 
@@ -104,7 +106,9 @@ public class magicLeap {
             System.out.println(hub);
 
             driver = new RemoteWebDriver(new URL(hub), capabilities);
-
+            DesktopScript();
+            tearDown();
+            
 
             System.out.println(capabilities);
             driverStart.stop();
@@ -123,6 +127,7 @@ public class magicLeap {
             status = "failed";
             System.out.println(f);
 
+        }
         }
 
     }
