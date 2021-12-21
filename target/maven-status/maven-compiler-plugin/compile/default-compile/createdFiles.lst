@@ -2,6 +2,7 @@ RockDoor.class
 TunnelTest.class
 TakeScreenShot.class
 VideoUpload.class
+HeavyTestWeb.class
 GeolocationTest.class
 magicLeap.class
 SkyMap.class
@@ -21,7 +22,7 @@ NetSpeed.class
 TestCase.class
 GoogleSpace.class
 ServiceWorkerTest.class
-DesignPlane.class
 RunTunnelListener.class
+DesignPlane.class
 FakeMediaTest.class
 BadSslTest.class

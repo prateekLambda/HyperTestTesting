@@ -83,8 +83,8 @@ public class magicLeap {
         System.out.println(this.TestName);
 
         
-        int j = System.getProperty("loopvalue");  
-        for (int i=0; i=<j; i++ ){
+        int j = Integer.parseInt(System.getProperty("loopvalue"));  
+        for (int i=0; i<=j; i++ ){
         try {
 
 
