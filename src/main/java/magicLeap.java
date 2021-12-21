@@ -82,9 +82,9 @@ public class magicLeap {
     public void setUp() throws Exception {
         System.out.println(this.TestName);
 
-        int i = 0;
+        
         int j = System.getProperty("loopvalue");  
-        for (i; i=<j; i++ ){
+        for (int i=0; i=<j; i++ ){
         try {
 
 
