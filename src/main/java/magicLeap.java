@@ -56,9 +56,9 @@ public class magicLeap {
     public magicLeap(String browser, String version, String platform) {
         try {
 
-            BrowserValue = System.getenv("LT_BROWSER_NAME");
-            versionValue = System.getenv("LT_BROWSER_VERSION");
-            PlatformValue = System.getenv("LT_OPERATING_SYSTEM");
+            BrowserValue = browser;
+            versionValue = version;
+            PlatformValue = platform;
             FixedIpValue = System.getProperty("fixedIP");
             Tunnel = System.getProperty("tunnel");
             if (BrowserValue != null) {
@@ -90,7 +90,7 @@ public class magicLeap {
             capabilities.setCapability("browserName", this.BrowserValue);
             capabilities.setCapability("browserVersion", this.versionValue);
             capabilities.setCapability("platform", this.PlatformValue);
-            capabilities.setCapability("tunnel", true);
+          //  capabilities.setCapability("tunnel", true);
 
             // capabilities.setCapability("accessKey", accesskey);
 
