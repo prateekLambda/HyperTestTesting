@@ -84,7 +84,7 @@ public class magicLeap {
 
         int i = 0;
         int j = System.getProperty("loopvalue");  
-        for (i; i<j; i++ ){
+        for (i; i=<j; i++ ){
         try {
 
 
